@@ -29,20 +29,27 @@ namespace WpfTaskApp
         public MainWindow()
         {
             InitializeComponent();
+            _fileSystemVisitor = new FileSystemVisitor();
+            setEvent();
+            _fileSystemVisitor.RaiseEvent("Application Started");
 
+
+        }
+
+        private void setEvent()
+        {
+            _fileSystemVisitor.NotificationEvent += (s, e) =>
+            {
+                notificationsList.Items.Add(e);
+            };
         }
 
         private void Find_Click(object sender, RoutedEventArgs e)
         {
+            _fileSystemVisitor.RaiseEvent("Looking for Files and Directories");
             path = Path.Text;
-            _fileSystemVisitor = new FileSystemVisitor();
-
             fillLists(path);
-
             displayDirectoryAndFileList();
-
-
-
         }
 
         private void fillLists(string path)
@@ -65,37 +72,71 @@ namespace WpfTaskApp
         {
             listofDirectories.Items.Clear();
             listofFiles.Items.Clear();
-            foreach (string directory in directories)
+            if(directories.Count > 0)
             {
-                listofDirectories.Items.Add(directory);
+                _fileSystemVisitor.RaiseEvent("Directories Found");
+                foreach (string directory in directories)
+                {
+                    listofDirectories.Items.Add(directory);
+                }
+
+            }
+            else
+            {
+                _fileSystemVisitor.RaiseEvent("There is no such Directory");
+            }
+            if (files.Count > 0)
+            {
+                _fileSystemVisitor.RaiseEvent("Files Found");
+                foreach (string file in files)
+                {
+                    listofFiles.Items.Add(file);
+                }
+
+            }
+            else
+            {
+                _fileSystemVisitor.RaiseEvent("There is no such File");
             }
 
-            foreach (string file in files)
-            {
-                listofFiles.Items.Add(file);
-            }
+
+
+
+          
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             _fileSystemVisitor = new FileSystemVisitor(search_directory.Text, search_file.Text);
+            setEvent();
             path = Path.Text;
             fillLists(path);
 
             if (search_directory.Text != "Directory Name" && search_directory.Text != "")
             {          
 
+                _fileSystemVisitor.RaiseEvent($"Searching {search_directory.Text} directory");
                 directories = _fileSystemVisitor.SearchDirectory(directories);
+                _fileSystemVisitor.RaiseEvent("Search End");
                 
+            }else
+            {
+                directories.Clear();
+                _fileSystemVisitor.RaiseEvent("Write Directory Name");
             }           
 
             if (search_file.Text != "File Name" && search_file.Text != "")
             {
-
+                _fileSystemVisitor.RaiseEvent($"Searching {search_file.Text} file");
                 files = _fileSystemVisitor.SearchFiles(files);
-                
+                _fileSystemVisitor.RaiseEvent("Search End");
             }
-           
+            else
+            {
+                files.Clear();
+                _fileSystemVisitor.RaiseEvent("Write File Name");
+            }
+
 
 
             displayDirectoryAndFileList();

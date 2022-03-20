@@ -5,19 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTaskApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1127">
     <Grid>
         <Label Content="Path" HorizontalAlignment="Left" Margin="29,28,0,0" VerticalAlignment="Top" Width="76"/>
         <TextBox Name="Path" HorizontalAlignment="Left" Margin="114,33,0,0" TextWrapping="Wrap" Text="C:\" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="Find" Content="Find" HorizontalAlignment="Left" Margin="250,31,0,0" VerticalAlignment="Top" Width="101" Click="Find_Click"/>
-        <ListBox x:Name="listofDirectories" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="29,135,427,29" RenderTransformOrigin="0.479,0.508"/>
+        <ListBox x:Name="listofDirectories" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="29,135,0,29" RenderTransformOrigin="0.479,0.508" HorizontalAlignment="Left" Width="332"/>
         <Label Content="Directories" HorizontalAlignment="Left" Margin="29,89,0,0" VerticalAlignment="Top" Width="142"/>
         <Label Content="Files" HorizontalAlignment="Left" Margin="402,89,0,0" VerticalAlignment="Top" Width="142"/>
-        <ListBox x:Name="listofFiles" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="388,135,32,29" RenderTransformOrigin="0.479,0.508"/>
+        <ListBox x:Name="listofFiles" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="388,135,0,29" RenderTransformOrigin="0.479,0.508" HorizontalAlignment="Left" Width="389"/>
         <TextBox x:Name="search_directory"  HorizontalAlignment="Left" Margin="388,32,0,0" TextWrapping="Wrap" Text="Directory Name" VerticalAlignment="Top" Width="120" GotFocus="search_directory_GotFocus" LostFocus="search_directory_LostFocus"/>
         <Rectangle HorizontalAlignment="Left" Height="46" Margin="382,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="395"/>
         <TextBox x:Name="search_file" HorizontalAlignment="Left" Margin="528,32,0,0" TextWrapping="Wrap" Text="File Name" VerticalAlignment="Top" Width="120" GotFocus="search_file_GotFocus" LostFocus="search_file_LostFocus"/>
         <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="667,30,0,0" VerticalAlignment="Top" Width="101" Click="Search_Click"/>
+        <ListBox x:Name="notificationsList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="793,135,0,29" RenderTransformOrigin="0.479,0.508" HorizontalAlignment="Left" Width="312"/>
+        <Label Name="notifications" Content="Notifications " HorizontalAlignment="Left" Margin="793,97,0,0" VerticalAlignment="Top" Width="148"/>
 
     </Grid>
 </Window>
