@@ -11,6 +11,7 @@ namespace WpfTaskApp.Services
         public string fileName { get; set; }
         public string directoryName { get; set; }
 
+        public event Action<object, string> NotificationEvent;      
 
 
         public FileSystemVisitor()
@@ -18,13 +19,15 @@ namespace WpfTaskApp.Services
 
         }
 
-
-
         public FileSystemVisitor(string directoryName, string fileName)
         {
             this.fileName = fileName;
             this.directoryName = directoryName;
 
+        }
+        public void RaiseEvent(string name)
+        {
+            NotificationEvent?.Invoke(this, name);
         }
 
         public List<string> SearchDirectory(List<string> directories)
