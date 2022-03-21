@@ -29,19 +29,15 @@ namespace WpfTaskApp
         public MainWindow()
         {
             InitializeComponent();
+            _fileSystemVisitor = new FileSystemVisitor();
 
         }
 
         private void Find_Click(object sender, RoutedEventArgs e)
         {
             path = Path.Text;
-            _fileSystemVisitor = new FileSystemVisitor();
-
             fillLists(path);
-
             displayDirectoryAndFileList();
-
-
 
         }
 
@@ -78,21 +74,18 @@ namespace WpfTaskApp
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            _fileSystemVisitor = new FileSystemVisitor(search_directory.Text, search_file.Text);
-            path = Path.Text;
-            fillLists(path);
-
+           
             if (search_directory.Text != "Directory Name" && search_directory.Text != "")
             {          
 
-                directories = _fileSystemVisitor.SearchDirectory(directories);
+                directories = _fileSystemVisitor.SearchDirectory(directories, search_directory.Text);
                 
             }           
 
             if (search_file.Text != "File Name" && search_file.Text != "")
             {
 
-                files = _fileSystemVisitor.SearchFiles(files);
+                files = _fileSystemVisitor.SearchFiles(files, search_file.Text);
                 
             }
            
