@@ -8,32 +8,20 @@ namespace WpfTaskApp.Services
 {
     public class FileSystemVisitor
     {
-        public string fileName { get; set; }
-        public string directoryName { get; set; }
-
-
-
+      
         public FileSystemVisitor()
         {
 
         }
+       
 
-
-
-        public FileSystemVisitor(string directoryName, string fileName)
-        {
-            this.fileName = fileName;
-            this.directoryName = directoryName;
-
-        }
-
-        public List<string> SearchDirectory(List<string> directories)
+        public List<string> SearchDirectory(List<string> directories,  string directoryName)
         {
             List<string> result = directories.Where(x => x.Contains(directoryName)).ToList();
             return result;
 
         }
-        public List<string> SearchFiles(List<string> files)
+        public List<string> SearchFiles(List<string> files, string fileName)
         {
             List<string> result = files.Where(x => x.Contains(fileName)).ToList();
             return result;
@@ -58,10 +46,6 @@ namespace WpfTaskApp.Services
             }
         }
 
-        private bool isPartOfName(string s)
-        {
-            return directoryName.Contains(s);
-        }
-
+      
     }
 }
